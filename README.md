@@ -1,3 +1,5 @@
+Website Link - https://expense-tracker-1838d.web.app
+Firebase Console - https://console.firebase.google.com/project/expense-tracker-1838d/overview
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
