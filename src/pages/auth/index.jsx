@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { auth, provider } from "../../config/firebase-config";
 import { signInWithPopup } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useGetUserInfo } from "../../hooks/useGetUserInfo";
+import "./styles.css";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const { isAuth } = useGetUserInfo();
+
   const signInWithGoogle = async () => {
     const results = await signInWithPopup(auth, provider);
     console.log(results);
@@ -19,10 +23,22 @@ const Auth = () => {
     navigate("/expense-tracker");
   };
 
+  // useEffect(() => {
+  //   if (isAuth) {
+  //     navigate("/expense-tracker");
+  //   }
+  // }, []);
+
+  if (isAuth) {
+    return <Navigate to="/expense-tracker" />;
+  }
+
   return (
-    <div>
+    <div className="login-page">
       <h2>Sign in with Google to continue</h2>
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
+      <button className="login-with-google-btn" onClick={signInWithGoogle}>
+        Sign in with Google
+      </button>
     </div>
   );
 };
